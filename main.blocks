@@ -1,0 +1,1 @@
+<xml xmlns="https://developers.google.com/blockly/xml"><block type="pxt-on-start" id="xRRgvHNlG#rZ^u`HECiY" x="0" y="0"><statement name="HANDLER"><block type="console_log" id="NuMz9HWdo0b]jC(bvI=V"><value name="value"><shadow type="text" id="Mj+#83P`,L7Nck``4I0f"><field name="TEXT">ciao</field></shadow></value></block></statement></block></xml>
