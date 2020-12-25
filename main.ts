@@ -8,9 +8,17 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
     info.changeScoreBy(1)
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
-    game.splash("Nooooo...")
-    game.reset()
+    info.changeLifeBy(-1)
+    music.siren.play()
+    gatto.x = mySprite + randint(0, 100)
+    gatto.y = mySprite + randint(0, 100)
+    if (info.life() < 1) {
+        game.splash("Nooooo...")
+        game.reset()
+    }
 })
+let mySprite = 0
+let gatto: Sprite = null
 game.splash("Benvenuta Giulia")
 game.splash("Acchiappa il panino!")
 game.splash("ma evita il gatto...")
@@ -35,7 +43,7 @@ let tnk = sprites.create(img`
     . . . . . f f . . f f . . . . . 
     `, SpriteKind.Player)
 controller.moveSprite(tnk)
-let gatto = sprites.create(img`
+gatto = sprites.create(img`
     e e e . . . . e e e . . . . 
     c d d c . . c d d c . . . . 
     c b d d f f d d b c . . . . 
@@ -71,8 +79,8 @@ let topo = sprites.create(img`
     `, SpriteKind.Food)
 gatto.setPosition(125, 19)
 topo.setPosition(16, 87)
+info.setLife(3)
 game.onUpdateInterval(2000, function () {
-    let mySprite = 0
     topo.x = mySprite + randint(0, 100)
     topo.y = mySprite + randint(0, 100)
     gatto.x = mySprite + randint(0, 100)
