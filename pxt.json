@@ -1,12 +1,16 @@
 {
     "name": "arcade",
     "dependencies": {
-        "device": "*"
+        "device": "*",
+        "servo": "*"
     },
     "files": [
         "main.blocks",
         "main.ts",
-        "README.md"
+        "README.md",
+        "main.py",
+        "tilemap.g.jres",
+        "tilemap.g.ts"
     ],
     "testFiles": [
         "test.ts"
