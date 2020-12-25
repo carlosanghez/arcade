@@ -4,32 +4,38 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     music.powerUp.play()
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
+    info.changeScoreBy(1)
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
-    game.splash("Bene, brava!")
+    game.splash("Nooooo...")
     game.reset()
 })
 game.splash("Benvenuta Giulia")
-game.splash("Acchiappa il gatto!")
-let mySprite = sprites.create(img`
-    . . . . . f f 4 4 f f . . . . . 
-    . . . . f 5 4 5 5 4 5 f . . . . 
-    . . . f e 4 5 5 5 5 4 e f . . . 
-    . . f b 3 e 4 4 4 4 e 3 b f . . 
-    . . f 3 3 3 3 3 3 3 3 3 3 f . . 
-    . f 3 3 e b 3 e e 3 b e 3 3 f . 
-    . f 3 3 f f e e e e f f 3 3 f . 
-    . f b b f b f e e f b f b b f . 
-    . f b b e 1 f 4 4 f 1 e b b f . 
-    f f b b f 4 4 4 4 4 4 f b b f f 
-    f b b f f f e e e e f f f b b f 
-    . f e e f b d d d d b f e e f . 
-    . . e 4 c d d d d d d c 4 e . . 
-    . . e f b d b d b d b b f e . . 
-    . . . f f 1 d 1 d 1 d f f . . . 
-    . . . . . f f b b f f . . . . . 
+game.splash("Acchiappa il panino!")
+game.splash("ma evita il gatto...")
+scene.setBackgroundColor(3)
+info.setScore(0)
+let tnk = sprites.create(img`
+    . . . . . . 5 . 5 . . . . . . . 
+    . . . . . f 5 5 5 f f . . . . . 
+    . . . . f 1 5 2 5 1 6 f . . . . 
+    . . . f 1 6 6 6 6 6 1 6 f . . . 
+    . . . f 6 6 f f f f 6 1 f . . . 
+    . . . f 6 f f d d f f 6 f . . . 
+    . . f 6 f d f d d f d f 6 f . . 
+    . . f 6 f d 3 d d 3 d f 6 f . . 
+    . . f 6 6 f d d d d f 6 6 f . . 
+    . f 6 6 f 3 f f f f 3 f 6 6 f . 
+    . . f f d 3 5 3 3 5 3 d f f . . 
+    . . f d d f 3 5 5 3 f d d f . . 
+    . . . f f 3 3 3 3 3 3 f f . . . 
+    . . . f 3 3 5 3 3 5 3 3 f . . . 
+    . . . f f f f f f f f f f . . . 
+    . . . . . f f . . f f . . . . . 
     `, SpriteKind.Player)
-controller.moveSprite(mySprite)
-let mySprite2 = sprites.create(img`
+controller.moveSprite(tnk)
+let gatto = sprites.create(img`
     e e e . . . . e e e . . . . 
     c d d c . . c d d c . . . . 
     c b d d f f d d b c . . . . 
@@ -45,9 +51,31 @@ let mySprite2 = sprites.create(img`
     . f d f f f d f f d f . . . 
     . f f . . f f . . f f . . . 
     `, SpriteKind.Enemy)
-mySprite2.setPosition(30, 27)
-scene.setBackgroundColor(3)
+let topo = sprites.create(img`
+    . . . . c c c b b b b b . . . . 
+    . . c c b 4 4 4 4 4 4 b b b . . 
+    . c c 4 4 4 4 4 5 4 4 4 4 b c . 
+    . e 4 4 4 4 4 4 4 4 4 5 4 4 e . 
+    e b 4 5 4 4 5 4 4 4 4 4 4 4 b c 
+    e b 4 4 4 4 4 4 4 4 4 4 5 4 4 e 
+    e b b 4 4 4 4 4 4 4 4 4 4 4 b e 
+    . e b 4 4 4 4 4 5 4 4 4 4 b e . 
+    8 7 e e b 4 4 4 4 4 4 b e e 6 8 
+    8 7 2 e e e e e e e e e e 2 7 8 
+    e 6 6 2 2 2 2 2 2 2 2 2 2 6 c e 
+    e c 6 7 6 6 7 7 7 6 6 7 6 c c e 
+    e b e 8 8 c c 8 8 c c c 8 e b e 
+    e e b e c c e e e e e c e b e e 
+    . e e b b 4 4 4 4 4 4 4 4 e e . 
+    . . . c c c c c e e e e e . . . 
+    `, SpriteKind.Food)
+gatto.setPosition(125, 19)
+topo.setPosition(16, 87)
 game.onUpdateInterval(2000, function () {
-    mySprite2.setPosition(randint(0, 100), randint(0, 100))
+    let mySprite = 0
+    topo.x = mySprite + randint(0, 100)
+    topo.y = mySprite + randint(0, 100)
+    gatto.x = mySprite + randint(0, 100)
+    gatto.y = mySprite + randint(0, 100)
     music.baDing.play()
 })
