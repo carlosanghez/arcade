@@ -86,4 +86,8 @@ game.onUpdateInterval(2000, function () {
     gatto.x = mySprite + randint(0, 100)
     gatto.y = mySprite + randint(0, 100)
     music.baDing.play()
+    if (info.score() / 10 > 1) {
+        info.setScore(0)
+        info.changeLifeBy(1)
+    }
 })
